@@ -1,0 +1,5 @@
+Saya termotivasi mengikuti Bootcamp Laravel Web Dev untuk memperkuat dasar-dasar web development modern 
+sekaligus memperdalam praktik terbaik Laravel—mulai dari arsitektur MVC, RESTful API, autentikasi/otorisasi, hingga testing dan deployment. 
+Melalui kurikulum intensif dan proyek nyata, saya ingin membangun portofolio yang rapi, terbiasa dengan Git & kolaborasi tim, serta meningkatkan problem solving yang terukur. 
+Saya juga berharap memahami ekosistem Laravel (Eloquent, Blade, Queues, Events) secara menyeluruh agar bisa mengembangkan aplikasi yang aman, skalabel, dan mudah dirawat. 
+Setelah bootcamp, target saya adalah siap kerja sebagai Laravel developer, mampu berkontribusi pada produk nyata, dan terus belajar mengikuti perkembangan teknologi backend maupun full-stack.
