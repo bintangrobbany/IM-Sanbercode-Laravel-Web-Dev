@@ -1,0 +1,92 @@
+1. Buat Database
+
+CREATE DATABASE myshop;
+
+2. Membuat Table
+
+CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS categories (
+  id   INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS items (
+  id           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name         VARCHAR(255) NOT NULL,
+  description  VARCHAR(255),
+  price        INT NOT NULL,
+  stock        INT NOT NULL,
+  category_id  INT UNSIGNED NOT NULL,
+  CONSTRAINT fk_items_category
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+
+3.  Memasukkan Data pada Table
+
+USE myshop;
+
+INSERT INTO users (name, email, password) VALUES
+('John Doe', 'john@doe.com', 'john123'),
+('Jane Doe', 'jane@doe.com', 'jenita123');
+
+USE myshop;
+
+INSERT INTO categories (name) VALUES
+('gadget'),
+('cloth'),
+('men'),
+('women'),
+('branded');
+
+USE myshop;
+
+INSERT INTO items (name, description, price, stock, category_id) VALUES
+('Sumsang b50', 'hape keren dari merek sumsang', 4000000, 100, 1),
+('Uniklooh', 'baju keren dari brand ternama', 500000, 50, 2),
+('IMHO Watch', 'jam tangan anak yang jujur banget', 2000000, 10, 1);
+
+4. Menampilkan dan Mengambil data 
+
+a. Mengambil data users
+
+SELECT id, name, email
+FROM users;
+
+b. Mengambil data items
+
+SELECT *
+FROM items
+WHERE price > 1000000;
+
+SELECT *
+FROM items
+WHERE name LIKE '%uniklo%';
+
+
+c. Menampilkan data items join dengan kategori
+
+USE myshop;
+
+SELECT 
+  i.name,
+  i.description,
+  i.price,
+  i.stock,
+  i.category_id,
+  c.name AS kategori
+FROM items AS i
+INNER JOIN categories AS c
+  ON c.id = i.category_id;
+
+5. Mengubah Data dari Database
+
+UPDATE items
+SET price = 2500000
+WHERE name = 'Sumsang b50';
