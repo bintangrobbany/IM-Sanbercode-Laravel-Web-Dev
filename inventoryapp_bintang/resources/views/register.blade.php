@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-</head>
-<body>
+@extends('layouts.master')
+@section('title', 'Home')
+@section('content')
     <h1>Buat Account Baru!</h1>
     <h2>Sign Up Form</h2>
     <form action="/welcome" method="post">
@@ -34,5 +29,4 @@
         <input type="submit" value="Sign Up"><br><br>
     </form>
     <a href="/">Kembali</a>
-</body>
-</html>
+@endsection

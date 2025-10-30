@@ -23,3 +23,4 @@ Route::get('/register', [FormController::class, 'register']);
 
 // Route untuk memproses data dari form registrasi dan menampilkan halaman selamat datang
 Route::post('/welcome', [FormController::class, 'welcome']);
+
