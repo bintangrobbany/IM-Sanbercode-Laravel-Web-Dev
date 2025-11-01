@@ -11,17 +11,14 @@
 </head>
 
 <body>
-    <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
-        <!-- Sidebar Start -->
+
         @include('partials.sidebar')
-        <!--  Sidebar End -->
-        <!--  Main wrapper -->
+
         <div class="body-wrapper">
-            <!--  Header Start -->
             @include('partials.header')
-            <!--  Header End -->
+
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
@@ -38,12 +35,31 @@
             </div>
         </div>
     </div>
+    
     <script src="{{asset('template/src/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <script src="{{asset('template/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('template/src/assets/libs/simplebar/dist/simplebar.js')}}"></script>
     <script src="{{asset('template/src/assets/js/sidebarmenu.js')}}"></script>
     <script src="{{asset('template/src/assets/js/app.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('alert'))
+        <script>
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: '{{ session('alert.type') }}',
+                title: '{{ session('alert.message') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        </script>
+    @endif
+    
+    @stack('scripts')
 </body>
 
 </html>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\CategoryController; // <-- TAMBAHKAN BARIS INI
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,8 @@ Route::get('/register', [FormController::class, 'register']);
 // Route untuk memproses data dari form registrasi dan menampilkan halaman selamat datang
 Route::post('/welcome', [FormController::class, 'welcome']);
 
+
+// -----------------------------------------------------------------------
+// RUTE UNTUK PROSES CRUD CATEGORY
+// -----------------------------------------------------------------------
+Route::resource('category', CategoryController::class);
