@@ -2,31 +2,39 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\CategoryController; // <-- TAMBAHKAN BARIS INI
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ProfileController; // Tambahkan ProfileController
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Di sini Anda dapat mendaftarkan rute web untuk aplikasi Anda.
-| Rute-rute ini dimuat oleh RouteServiceProvider dan semuanya akan
-| ditugaskan ke grup middleware "web". Buat sesuatu yang hebat!
-|
 */
 
-// Route untuk halaman utama (Home)
-Route::get('/', [DashboardController::class, 'index']);
+// Halaman utama setelah login
+Route::get('/', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
-// Route untuk menampilkan halaman registrasi
-Route::get('/register', [FormController::class, 'register']);
+// Semua rute otentikasi (login, register, logout) dari Breeze
+require __DIR__ . '/auth.php';
 
-// Route untuk memproses data dari form registrasi dan menampilkan halaman selamat datang
-Route::post('/welcome', [FormController::class, 'welcome']);
+// Grup rute yang hanya bisa diakses oleh ADMIN
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
+});
 
+// Grup rute yang bisa diakses oleh ADMIN dan STAFF
+Route::middleware(['auth', 'role:admin,staff'])->group(function () {
+    Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('/transaction/create', [TransactionController::class, 'create'])->name('transaction.create');
+    Route::post('/transaction', [TransactionController::class, 'store'])->name('transaction.store');
+});
 
-// -----------------------------------------------------------------------
-// RUTE UNTUK PROSES CRUD CATEGORY
-// -----------------------------------------------------------------------
-Route::resource('category', CategoryController::class);
+// Grup rute untuk semua pengguna yang sudah login
+Route::middleware('auth')->group(function () {
+    // Rute untuk menampilkan dan menyimpan profil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
